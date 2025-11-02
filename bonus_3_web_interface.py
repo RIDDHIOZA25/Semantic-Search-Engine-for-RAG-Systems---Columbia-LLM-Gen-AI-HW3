@@ -36,20 +36,57 @@ from task_b_semantic_search import (
     MMR_LAMBDA
 )
 
+# Import Task A functions to create vector store if needed
+try:
+    from task_a_document_processing import (
+        load_documents,
+        split_documents,
+        create_vector_store,
+        CHUNK_SIZE,
+        CHUNK_OVERLAP
+    )
+    CAN_CREATE_VECTOR_STORE = True
+except ImportError:
+    CAN_CREATE_VECTOR_STORE = False
+
 
 @st.cache_resource
 def load_vector_store():
-    """Load vector store (cached for Streamlit)."""
+    """Load vector store (cached for Streamlit). Create if it doesn't exist."""
     embeddings = HuggingFaceEmbeddings(
         model_name=EMBEDDING_MODEL_NAME,
         model_kwargs={'device': 'cpu'},
         encode_kwargs={'normalize_embeddings': False}
     )
     
+    # If vector store doesn't exist, try to create it
     if not os.path.exists(PERSIST_DIR):
-        st.error(f"Vector store not found at {PERSIST_DIR}. Please run task_a_document_processing.py first.")
-        st.stop()
+        if CAN_CREATE_VECTOR_STORE:
+            with st.spinner("Vector store not found. Creating it from data files..."):
+                try:
+                    # Load and process documents
+                    docs = load_documents()
+                    chunks = split_documents(docs, chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP)
+                    
+                    # Create vector store
+                    vector_store = create_vector_store(
+                        chunks,
+                        embeddings,
+                        persist_directory=PERSIST_DIR,
+                        collection_name=COLLECTION
+                    )
+                    st.success("✓ Vector store created successfully!")
+                    return vector_store
+                except Exception as e:
+                    st.error(f"Failed to create vector store: {e}")
+                    st.info("Please ensure data files exist in ./data/ directory")
+                    st.stop()
+        else:
+            st.error(f"Vector store not found at {PERSIST_DIR}.")
+            st.info("Please run `python task_a_document_processing.py` first, or ensure data files are available.")
+            st.stop()
     
+    # Load existing vector store
     vector_store = Chroma(
         persist_directory=PERSIST_DIR,
         collection_name=COLLECTION,

@@ -1,0 +1,14 @@
+# Requirements for Task B: Semantic Search with Multiple Methods
+
+# Core dependencies (same as Task A)
+langchain>=0.2.10
+langchain-community>=0.2.10
+langchain-core>=0.2.0
+chromadb>=0.5.5
+
+# Embeddings (sentence-transformers)
+sentence-transformers>=2.2.0
+
+# Optional: Use newer langchain-huggingface to avoid deprecation warnings
+# langchain-huggingface>=0.0.3
+

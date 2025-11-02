@@ -1,0 +1,17 @@
+# Requirements for Bonus Features
+
+# Bonus 1: Hybrid Search (BM25 + Semantic)
+rank-bm25>=0.2.2
+
+# Bonus 2: Embedding Comparison
+# (uses same dependencies as main tasks)
+# Optional:
+# openai>=1.0.0  # For OpenAI embeddings
+# cohere>=4.0.0  # For Cohere embeddings
+
+# Bonus 3: Web Interface
+streamlit>=1.28.0
+
+# All bonuses also need base requirements from Task A/B/C:
+# langchain, langchain-community, chromadb, sentence-transformers, etc.
+

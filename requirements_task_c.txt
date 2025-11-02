@@ -1,0 +1,18 @@
+# Requirements for Task C: Comprehensive Evaluation
+
+# Core dependencies (inherited from Task A and B)
+langchain>=0.2.10
+langchain-community>=0.2.10
+langchain-core>=0.2.0
+chromadb>=0.5.5
+sentence-transformers>=2.2.0
+
+# Visualization and analysis
+matplotlib>=3.5.0
+scikit-learn>=1.0.0
+numpy>=1.21.0
+
+# Optional: Use newer packages to avoid deprecation warnings
+# langchain-huggingface>=0.0.3
+# langchain-chroma>=0.1.0
+

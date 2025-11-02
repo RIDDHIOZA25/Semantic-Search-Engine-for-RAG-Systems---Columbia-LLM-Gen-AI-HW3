@@ -1,0 +1,21 @@
+# Requirements for Task A: Document Processing and Vector Store Setup
+
+# Core LangChain packages
+langchain>=0.2.10
+langchain-community>=0.2.10
+langchain-text-splitters>=0.2.0
+langchain-core>=0.2.0
+
+# Vector store
+chromadb>=0.5.5
+
+# Document loaders
+pypdf>=4.2.0
+
+# Embeddings (sentence-transformers)
+sentence-transformers>=2.2.0
+
+# For Windows users - install PyTorch CPU version to avoid DLL issues
+# Uncomment the line below if you encounter PyTorch DLL errors on Windows
+# torch --index-url https://download.pytorch.org/whl/cpu
+

@@ -1,0 +1,27 @@
+# Requirements for Streamlit Cloud deployment
+# This file is used by Streamlit Cloud to install dependencies
+
+# Streamlit (already installed by Streamlit Cloud, but listed for completeness)
+streamlit>=1.28.0
+
+# LangChain core packages
+langchain>=0.2.10
+langchain-community>=0.2.10
+langchain-core>=0.2.0
+langchain-text-splitters>=0.2.0
+
+# Vector store
+chromadb>=0.5.5
+
+# Embeddings (sentence-transformers)
+sentence-transformers>=2.2.0
+
+# Optional: Use newer langchain-huggingface if available
+langchain-huggingface>=0.0.3
+
+# Document loaders (needed for task_a_document_processing.py if vector store doesn't exist)
+pypdf>=4.2.0
+
+# Additional dependencies that might be needed
+numpy>=1.21.0
+
